@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>PrivAgent</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="brand">
+      <div class="brand-row">
+        <div class="logo">🛡</div>
+        <div>
+          <h1>PRIVAGENT</h1>
+          <p class="tagline">Your AI Agent. Your Data. Your Control.</p>
+        </div>
+      </div>
+      <div class="status-pill" id="protectionStatus">
+        <span class="dot"></span> PROTECTION ACTIVE
+      </div>
+    </header>
+
+    <section class="card pii-card">
+      <h2>PII PROTECTED</h2>
+      <div class="pii-grid" id="piiGrid">
+        <div class="pii-item"><span>Email</span><b id="piiEmail">0</b></div>
+        <div class="pii-item"><span>Password</span><b id="piiPassword">0</b></div>
+        <div class="pii-item"><span>Name</span><b id="piiName">0</b></div>
+        <div class="pii-item"><span>Phone</span><b id="piiPhone">0</b></div>
+      </div>
+      <div class="toggles">
+        <div class="toggle-row"><span>Auto Masking</span><b class="on">ON</b></div>
+        <div class="toggle-row"><span>Local Processing</span><b class="on">ON</b></div>
+        <div class="toggle-row"><span>Server Sharing</span><b class="warn">SANITIZED ONLY</b></div>
+      </div>
+    </section>
+
+    <section class="card voice-card">
+      <h2>🎙 Voice Command</h2>
+      <button id="voiceBtn" class="btn btn-voice">Start Listening</button>
+      <div id="voiceStatus" class="voice-status hidden"></div>
+      <div id="voiceTranscript" class="voice-transcript hidden"></div>
+      <div id="commandResult" class="command-result hidden"></div>
+    </section>
+
+    <section class="card text-command-card">
+      <h2>⌨ Type a Command</h2>
+      <div class="text-cmd-row">
+        <input type="text" id="textCmdInput" placeholder='e.g. "Open Google" or "Search Google for AI"' />
+        <button id="textCmdBtn" class="btn btn-small">Run</button>
+      </div>
+    </section>
+
+    <section class="card actions-card">
+      <button id="scanBtn" class="btn">🔍 Scan &amp; Protect</button>
+      <button id="sendBtn" class="btn">📤 Send Sanitized Context</button>
+      <button id="planBtn" class="btn">🧠 Generate Action Plan</button>
+      <button id="dashboardBtn" class="btn btn-outline">📊 Privacy Dashboard</button>
+    </section>
+
+    <div id="approvalModal" class="modal hidden">
+      <div class="modal-box">
+        <h3>⚠ HIGH-RISK ACTION</h3>
+        <p id="approvalAction"></p>
+        <p id="approvalRisk"></p>
+        <p id="approvalReason" class="reason"></p>
+        <div class="modal-actions">
+          <button id="approveCancel" class="btn btn-outline">Cancel</button>
+          <button id="approveOk" class="btn btn-danger">Approve</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="card history-card">
+      <h2>COMMAND HISTORY</h2>
+      <div id="historyList" class="history-list">
+        <div class="history-empty">No commands yet — try the voice or text command above.</div>
+      </div>
+    </section>
+
+    <footer>
+      <span id="serverStatus" class="server-status">● checking server…</span>
+    </footer>
+  </div>
+
+  <script src="../voice/command-parser.js"></script>
+  <script src="../voice/speech-recognition.js"></script>
+  <script src="../agent/intent-engine.js"></script>
+  <script src="../agent/action-validator.js"></script>
+  <script src="../agent/risk-engine.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

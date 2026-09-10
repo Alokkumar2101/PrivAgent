@@ -1,0 +1,16 @@
+/* PrivAgent injected styles — scoped, minimal, non-destructive to host page */
+.privagent-mask-wrap {
+  position: relative !important;
+  display: inline-block !important;
+}
+.privagent-mask-badge {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+#privagent-status-banner {
+  animation: privagent-fade-in 0.25s ease-out;
+}
+@keyframes privagent-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
