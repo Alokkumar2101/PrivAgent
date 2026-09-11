@@ -1,0 +1,12 @@
+[
+  { "id": 1, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["doubleclick.net"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 2, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["googlesyndication.com"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 3, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["google-analytics.com"], "resourceTypes": ["script", "xmlhttprequest"] } },
+  { "id": 4, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["googletagmanager.com"], "resourceTypes": ["script", "xmlhttprequest"] } },
+  { "id": 5, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["adnxs.com"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 6, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["scorecardresearch.com"], "resourceTypes": ["script", "xmlhttprequest", "image"] } },
+  { "id": 7, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["criteo.com"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 8, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["outbrain.com"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 9, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["taboola.com"], "resourceTypes": ["script", "xmlhttprequest", "image", "sub_frame"] } },
+  { "id": 10, "priority": 1, "action": { "type": "block" }, "condition": { "requestDomains": ["facebook.com"], "urlFilter": "/tr*", "resourceTypes": ["script", "xmlhttprequest", "image"] } }
+]

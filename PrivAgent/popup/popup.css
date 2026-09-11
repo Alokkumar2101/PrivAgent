@@ -1,0 +1,91 @@
+:root {
+  --bg-0: #060d16; --bg-1: #0a1622; --bg-2: #0e1f2e;
+  --cyan: #00e5ff; --cyan-dim: rgba(0, 229, 255, 0.35);
+  --text-0: #eaf7fb; --text-1: #9fb8c4;
+  --green: #34d399; --amber: #fbbf24; --red: #f87171;
+  --border: rgba(0, 229, 255, 0.18);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; width: 400px;
+  background: radial-gradient(circle at top right, var(--bg-2), var(--bg-0) 70%);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text-0);
+}
+.app { padding: 16px; display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; }
+
+.brand {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.brand-row { display: flex; align-items: center; gap: 10px; }
+.logo {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--cyan), #3b82f6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; box-shadow: 0 0 16px var(--cyan-dim);
+}
+h1 { font-size: 16px; margin: 0; letter-spacing: 1.5px; color: var(--cyan); }
+.tagline { margin: 2px 0 0; font-size: 11px; color: var(--text-1); }
+.status-dot { color: var(--green); font-size: 14px; text-shadow: 0 0 8px var(--green); }
+.status-dot.inactive { color: var(--text-1); text-shadow: none; }
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+}
+.card h2 {
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text-1); margin: 0 0 8px 0;
+}
+.card h2.no-margin { margin: 0; }
+.hint { margin: 2px 0 0; font-size: 11px; color: var(--text-1); }
+
+.domain { font-size: 15px; font-weight: 600; color: var(--text-0); word-break: break-all; }
+
+.score-row { display: flex; align-items: baseline; gap: 4px; }
+.score-value { font-size: 30px; font-weight: 800; color: var(--cyan); }
+.score-max { font-size: 13px; color: var(--text-1); }
+
+.pii-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pii-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(0,229,255,0.05); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px; font-size: 12px;
+}
+.pii-item b { color: var(--cyan); font-size: 14px; }
+
+.empty-note { font-size: 11px; color: var(--text-1); font-style: italic; margin-top: 8px; }
+.hidden { display: none !important; }
+
+.toggle-row, .mode-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+.switch {
+  width: 44px; height: 24px; border-radius: 999px; border: 1px solid var(--border);
+  background: rgba(255,255,255,0.08); position: relative; cursor: pointer; flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.switch[aria-checked="true"] { background: linear-gradient(135deg, #3b82f6, var(--cyan)); border-color: transparent; }
+.switch-knob {
+  position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; transition: transform 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+.switch[aria-checked="true"] .switch-knob { transform: translateX(20px); }
+.switch:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.tp-row { font-size: 14px; font-weight: 600; }
+
+.mode-select {
+  background: rgba(255,255,255,0.04); color: var(--text-0); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 600;
+}
+.mode-select:focus-visible { outline: 2px solid var(--cyan); }
+
+.btn-primary {
+  width: 100%; padding: 11px 12px; border: none; border-radius: 9px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  background: linear-gradient(135deg, #3b82f6, var(--cyan)); color: #041018;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.btn-primary:hover { box-shadow: 0 0 14px var(--cyan-dim); transform: translateY(-1px); }
+.btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }

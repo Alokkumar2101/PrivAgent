@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>PrivAgent</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="brand">
+      <div class="brand-row">
+        <div class="logo">🛡</div>
+        <div>
+          <h1>PRIVAGENT</h1>
+          <p class="tagline" id="protectionStatusText">Privacy Protection Active</p>
+        </div>
+      </div>
+      <span class="status-dot" id="protectionDot" aria-hidden="true">●</span>
+    </header>
+
+    <section class="card">
+      <h2>Current Website</h2>
+      <div class="domain" id="currentDomain">—</div>
+    </section>
+
+    <section class="card">
+      <h2>Privacy Score</h2>
+      <div class="score-row">
+        <div class="score-value" id="privacyScore">—</div>
+        <div class="score-max">/ 100</div>
+      </div>
+      <div class="empty-note hidden" id="scoreEmptyNote">Not enough activity</div>
+    </section>
+
+    <section class="card">
+      <h2>PII Protected</h2>
+      <div class="pii-grid" id="piiGrid">
+        <div class="pii-item"><span>Email</span><b id="piiEmail">0</b></div>
+        <div class="pii-item"><span>Password</span><b id="piiPassword">0</b></div>
+        <div class="pii-item"><span>Phone</span><b id="piiPhone">0</b></div>
+        <div class="pii-item"><span>Name</span><b id="piiName">0</b></div>
+      </div>
+      <div class="empty-note hidden" id="piiEmptyNote">No sensitive information detected</div>
+    </section>
+
+    <section class="card">
+      <div class="toggle-row">
+        <div>
+          <h2 class="no-margin">PII Masking</h2>
+          <p class="hint">Protect sensitive information visually</p>
+        </div>
+        <button id="maskingToggle" class="switch" role="switch" aria-checked="false" aria-label="PII Masking">
+          <span class="switch-knob"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Third-Party Requests</h2>
+      <div class="tp-row" id="thirdPartyRow">0 detected</div>
+      <div class="empty-note hidden" id="tpEmptyNote">No third-party requests detected</div>
+    </section>
+
+    <section class="card">
+      <div class="mode-row">
+        <div>
+          <h2 class="no-margin">Protection Mode</h2>
+        </div>
+        <select id="protectionMode" class="mode-select" aria-label="Protection Mode">
+          <option value="SAFE">SAFE</option>
+          <option value="BALANCED">BALANCED</option>
+          <option value="OFF">OFF</option>
+        </select>
+      </div>
+    </section>
+
+    <button id="openDashboardBtn" class="btn-primary">Open Dashboard</button>
+  </div>
+
+  <script src="../scripts/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
