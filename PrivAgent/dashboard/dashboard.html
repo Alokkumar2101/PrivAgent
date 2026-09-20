@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>PrivAgent Dashboard</title>
+<link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" aria-label="Dashboard sections">
+    <div class="brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2L4 5v6c0 5.2 3.4 9.4 8 11 4.6-1.6 8-5.8 8-11V5l-8-3z" stroke="#FFD21F" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 12.2l2 2 4-4.2" stroke="#FFD21F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      PRIVAGENT
+    </div>
+    <button class="nav-item" data-tab="overview">Overview</button>
+    <button class="nav-item" data-tab="protection">Protection</button>
+    <button class="nav-item" data-tab="activity">Activity</button>
+    <button class="nav-item" data-tab="voice">Voice Agent</button>
+    <button class="nav-item" data-tab="analytics">Analytics</button>
+    <button class="nav-item" data-tab="settings">Settings</button>
+    <div class="demo-banner" id="demoBanner" hidden>DEMO MODE</div>
+  </nav>
+
+  <main class="content">
+
+    <!-- OVERVIEW -->
+    <section id="tab-overview" class="tab-panel">
+      <h1>Overview</h1>
+      <div class="grid">
+        <div class="stat-card"><h3>Privacy Score</h3><p class="big-number" id="ov-score">—</p></div>
+        <div class="stat-card"><h3>PII Detected</h3><p class="big-number" id="ov-detected">0</p></div>
+        <div class="stat-card"><h3>PII Protected</h3><p class="big-number" id="ov-protected">0</p></div>
+        <div class="stat-card"><h3>Protected Requests</h3><p class="big-number" id="ov-req-protected">0</p></div>
+        <div class="stat-card"><h3>Blocked Requests</h3><p class="big-number" id="ov-req-blocked">0</p></div>
+        <div class="stat-card"><h3>Third-Party Requests</h3><p class="big-number" id="ov-thirdparty">0</p></div>
+        <div class="stat-card"><h3>Protection Mode</h3><p class="big-number small" id="ov-mode">—</p></div>
+        <div class="stat-card"><h3>Masking Status</h3><p class="big-number small" id="ov-masking">—</p></div>
+        <div class="stat-card"><h3>Voice Commands</h3><p class="big-number small" id="ov-voice">0 executed</p></div>
+      </div>
+      <p class="empty-state" id="ov-empty" hidden>No privacy activity yet. Your protection and voice activity will appear here.</p>
+    </section>
+
+    <!-- PROTECTION -->
+    <section id="tab-protection" class="tab-panel" hidden>
+      <h1>Protection</h1>
+      <div class="setting-row">
+        <div><h3>Protection</h3><p class="hint">Master switch for PrivAgent's active protection.</p></div>
+        <button class="toggle" id="p-protectionEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <div><h3>Protection Mode</h3><p class="hint">SAFE = maximum privacy. BALANCED = privacy while prioritizing compatibility. OFF = monitoring only.</p></div>
+        <select id="p-protectionMode" class="select">
+          <option value="SAFE">SAFE</option><option value="BALANCED">BALANCED</option><option value="OFF">OFF</option>
+        </select>
+      </div>
+      <div class="setting-row">
+        <div><h3>PII Detection</h3><p class="hint">Scan pages for sensitive information as it's entered.</p></div>
+        <button class="toggle" id="p-piiDetectionEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <div><h3>Third-Party Detection</h3><p class="hint">Flag known tracker/analytics destinations.</p></div>
+        <button class="toggle" id="p-thirdPartyDetectionEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <div><h3>Network Monitoring</h3><p class="hint">Observe request destinations. Never blocks a legitimate request.</p></div>
+        <button class="toggle" id="p-networkMonitoringEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <div><h3>PII Masking</h3><p class="hint">Visually mask eligible fields. Never affects password/login functionality.</p></div>
+        <button class="toggle" id="p-maskingEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+    </section>
+
+    <!-- ACTIVITY -->
+    <section id="tab-activity" class="tab-panel" hidden>
+      <h1>Activity</h1>
+      <div class="filter-bar">
+        <input id="h-search" type="search" placeholder="Search domain..." class="text-input" aria-label="Search activity by domain" />
+        <select id="h-eventType" class="select" aria-label="Filter by event type">
+          <option value="">All events</option>
+          <option value="pii_detected">PII detected</option>
+          <option value="tracker_detected">Tracker detected</option>
+          <option value="voice_command">Voice command</option>
+          <option value="setting_changed">Setting changed</option>
+        </select>
+        <select id="h-risk" class="select" aria-label="Filter by risk level">
+          <option value="">All risk levels</option><option value="HIGH">High</option><option value="MEDIUM">Medium</option><option value="LOW">Low</option>
+        </select>
+        <select id="h-action" class="select" aria-label="Filter by action">
+          <option value="">All actions</option><option value="detected">Detected</option><option value="protected">Protected</option>
+          <option value="executed">Executed</option><option value="not_supported">Not supported</option>
+          <option value="enabled">Enabled</option><option value="disabled">Disabled</option>
+        </select>
+        <button id="h-clear" class="danger-btn">Clear History</button>
+      </div>
+      <ul id="historyList" class="history-list"></ul>
+      <p class="empty-state" id="h-empty" hidden>No privacy activity yet.</p>
+    </section>
+
+    <!-- VOICE AGENT -->
+    <section id="tab-voice" class="tab-panel" hidden>
+      <h1>Voice Agent</h1>
+      <div class="grid">
+        <div class="stat-card"><h3>Commands Executed</h3><p class="big-number" id="v-executed">0</p></div>
+        <div class="stat-card"><h3>Not Understood</h3><p class="big-number" id="v-failed">0</p></div>
+        <div class="stat-card"><h3>Voice Agent</h3><p class="big-number small" id="v-enabled">—</p></div>
+      </div>
+      <h2>Supported commands</h2>
+      <div class="command-grid">
+        <div class="command-group"><h4>Navigation</h4><p>go back · go forward · reload</p></div>
+        <div class="command-group"><h4>Sites</h4><p>open YouTube / Google / Gmail / GitHub / Instagram / LinkedIn / ChatGPT / Wikipedia / Amazon</p></div>
+        <div class="command-group"><h4>Search</h4><p>search Google for &lt;query&gt; · search YouTube for &lt;query&gt;</p></div>
+        <div class="command-group"><h4>Tabs</h4><p>open new tab · close this tab</p></div>
+        <div class="command-group"><h4>Scrolling</h4><p>scroll up / down · go to top / bottom</p></div>
+        <div class="command-group"><h4>PrivAgent</h4><p>open dashboard · open settings · show activity · enable/disable protection</p></div>
+      </div>
+      <h2>Recent voice activity</h2>
+      <ul id="voiceList" class="history-list"></ul>
+      <p class="empty-state" id="v-empty" hidden>No voice activity yet.</p>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section id="tab-analytics" class="tab-panel" hidden>
+      <h1>Analytics</h1>
+      <div class="grid">
+        <div class="stat-card"><h3>Total Detections</h3><p class="big-number" id="a-total">0</p></div>
+        <div class="stat-card"><h3>Total Protected</h3><p class="big-number" id="a-protected">0</p></div>
+        <div class="stat-card"><h3>Trackers Flagged</h3><p class="big-number" id="a-trackers">0</p></div>
+        <div class="stat-card"><h3>Most Common Category</h3><p class="big-number small" id="a-common">—</p></div>
+      </div>
+      <h2>Detections by type</h2>
+      <div id="a-byType" class="bar-list"></div>
+      <h2>Activity — last 14 days</h2>
+      <div id="a-timeline" class="timeline"></div>
+      <h2>Privacy score trend</h2>
+      <div id="a-scoreTrend" class="timeline"></div>
+      <p class="empty-state" id="a-empty" hidden>No privacy activity yet.</p>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="tab-panel" hidden>
+      <h1>Settings</h1>
+      <div class="setting-row">
+        <div><h3>Voice Agent</h3><p class="hint">Enable the voice command system in the popup. Microphone still requires an explicit tap.</p></div>
+        <button class="toggle" id="s-voiceCommandsEnabled" role="switch" aria-checked="false"><span class="toggle-knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <div><h3>Mode</h3><p class="hint">Demo Mode uses illustrative sample data for presentations and never touches real history.</p></div>
+        <select id="s-demoMode" class="select"><option value="false">Live Mode</option><option value="true">Demo Mode</option></select>
+      </div>
+      <div class="setting-row">
+        <div><h3>History Retention</h3><p class="hint">Maximum stored events (oldest removed first). 50–500.</p></div>
+        <input id="s-historyMax" type="number" min="50" max="500" step="10" class="text-input narrow" />
+      </div>
+      <div class="setting-row">
+        <div><h3>Clear Local Data</h3><p class="hint">Erases ALL settings and history and resets to defaults.</p></div>
+        <button id="s-clearAll" class="danger-btn">Clear Local Data</button>
+      </div>
+      <div class="setting-row">
+        <div><h3>Reset Settings</h3><p class="hint">Restores default settings. History is kept.</p></div>
+        <button id="s-resetSettings" class="secondary-btn">Reset Settings</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="confirmModal" class="modal-overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <p id="modalTitle">Are you sure?</p>
+    <div class="modal-actions">
+      <button id="modalCancel" class="secondary-btn">Cancel</button>
+      <button id="modalConfirm" class="danger-btn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="../scripts/storage.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

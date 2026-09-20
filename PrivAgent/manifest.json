@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "PrivAgent — Your AI Agent. Your Data. Your Control.",
+  "version": "4.0.0",
+  "description": "AI-powered browser privacy assistant. Detects sensitive information on websites, protects it without ever breaking login/password functionality, and offers fast, safely-allowlisted voice control of the browser.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting",
+    "storage",
+    "webNavigation",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "scripts/storage.js",
+        "scripts/detector.js",
+        "scripts/privacy-engine.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "PrivAgent",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "options_page": "dashboard/dashboard.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["dashboard/dashboard.html", "dashboard/dashboard.css", "dashboard/dashboard.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
